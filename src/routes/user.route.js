@@ -18,15 +18,14 @@ UserRouter.post("/user/register", async (req, res) => {
     });
   }
   const saltRounds = 10;
-  
+
   bcrypt
-  .hash(password, saltRounds)
-  .then((hash) => {
-      const newUser = await user.create({ first_name, last_name, email, hash });
+    .hash(password, saltRounds)
+    .then((hash) => {
+      const newUser = user.create({ first_name, last_name, email, hash });
       console.log("Hash ", hash);
     })
     .catch((err) => console.error(err.message));
-
 
   res.status(201).send({
     message: "User Created Successfully",

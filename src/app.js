@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 const PORT = process.env.PORT || 3333;
-const MONGO_DB_URI = process.env.MONGO_DB_URI;
+const MONGODB_URI = process.env.MONGO_DB_URI;
 
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to the Blog");
@@ -21,7 +21,7 @@ app.all("*", (req, res) => {
   });
 });
 
-connect().then(() => {
+connect(MONGODB_URI).then(() => {
   console.log("Connected to Mongo_DB");
 
   app.listen(PORT, () => {

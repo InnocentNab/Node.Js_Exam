@@ -10,22 +10,30 @@ const BlogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  tags: {},
-  state: {},
+  tags: [{ type: String }],
+  state: {
+    type: String,
+    enum: ["draft", "published", "archived", "deleted"],
+    default: "draft",
+  },
   author: {
     type: String,
     required: true,
   },
 
   read_count: {
-    type: String,
+    type: Number,
+    default: 0,
   },
 
   reading_time: {
     type: Date,
     default: Date.now,
   },
-  body: {},
+  body: {
+    type: String,
+    required: true,
+  },
 });
 
 const blog = mongoose.model("blog", BlogSchema);

@@ -5,7 +5,7 @@ import app from "../src/app.js";
 describe("E2E tests", () => {
   it("should be able to register", async () => {
     await clearDB();
-    const res = await request(app).post("/auth/register").send({
+    const res = await request(app).post("/user/register").send({
       email: "solomon.eniola7@gmail.com",
       password: "password1234",
       name: "Test User",
@@ -19,7 +19,7 @@ describe("E2E tests", () => {
   });
 
   it("should be able to login", async () => {
-    const res = await request(app).post("/auth/login").send({
+    const res = await request(app).post("/user/login").send({
       email: "",
       password: "",
     });

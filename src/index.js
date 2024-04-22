@@ -33,8 +33,6 @@ app.all("*", (req, res) => {
 });
 
 connect(MONGODB_URI).then(() => {
-  // console.log("Connected to Mongo_DB");
-
   app.listen(PORT, () => {
     console.log(`Server running at port ${PORT}`);
   });

@@ -1,6 +1,6 @@
 import request from "supertest";
 import { connect } from "../src/database/db.connect.js";
-import app from "../src/app.js";
+import app from "../src/index.js";
 
 describe("E2E tests", () => {
   it("should be able to register", async () => {

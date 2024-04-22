@@ -1,7 +1,5 @@
 import blog from "../database/schema/blogSchema.js";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import requireAuth from "../middleware/middleware.js";
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -14,6 +12,11 @@ export const getAll = async (req, res) => {
 
 export const Create = async (req, res) => {
   const { title, description, author, body } = req.body;
+  const oldPost = await blog.findOne({});
+  if (oldPost.title === req.body.title) {
+    return res.status(400).send("Post Exists");
+  }
+  // const read_time = math.celi(body.length / averagewordsperminutes);
   const newPost = await blog.create({ title, description, author, body });
   res.status(201).send({
     message: "Post Created Successfully",

@@ -2,11 +2,17 @@ import express from "express";
 import user from "../database/schema/UserSchema.js";
 import * as userController from "../controllers/userController.js";
 import dotenv from "dotenv";
-import requireAuth from "../middleware/middleware.js";
+import requireAuth from "../authenication/authenticaion.js";
+import { CreateValidation, LoginValidation } from "../validation/validate.js";
 dotenv.config();
 
 const UserRouter = express.Router();
 
-UserRouter.post("/user/register", userController.register);
-UserRouter.post("/user/login", requireAuth, userController.login);
+UserRouter.post("/user/register", CreateValidation, userController.register);
+UserRouter.post(
+  "/user/login",
+  LoginValidation,
+  requireAuth,
+  userController.login
+);
 export default UserRouter;

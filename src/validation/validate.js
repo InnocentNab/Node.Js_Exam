@@ -20,7 +20,7 @@ export const CreateValidation = async (req, res, next) => {
 export const LoginValidation = async (req, res, next) => {
   try {
     const schema = joi.object({
-      password: joi.string().required(),
+      password: joi.string().min(8).required(),
       email: joi.string().email().required(),
     });
 

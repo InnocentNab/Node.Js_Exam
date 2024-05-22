@@ -2,7 +2,7 @@ import express from "express";
 import user from "../database/schema/UserSchema.js";
 import * as userController from "../controllers/userController.js";
 import dotenv from "dotenv";
-import requireAuth from "../authenication/authenticaion.js";
+import requireAuth from "../authentication/authentication.js";
 import { CreateValidation, LoginValidation } from "../validation/validate.js";
 dotenv.config();
 

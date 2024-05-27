@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { connect } from "./database/db.connect.js";
+import redis from "./integration/redis.js";
+
 dotenv.config();
 
 const app = express();
@@ -32,6 +34,7 @@ app.all("*", (req, res) => {
   });
 });
 
+redis.connect();
 connect(MONGODB_URI).then(() => {
   app.listen(PORT, () => {
     console.log(`Server running at port ${PORT}`);

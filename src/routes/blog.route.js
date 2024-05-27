@@ -6,8 +6,8 @@ import requireAuth from "../authentication/authentication.js";
 const blogRouter = express.Router();
 
 blogRouter.get("/blog", getAll);
-blogRouter.post("/blog/create", requireAuth, Create);
-blogRouter.put("/blog/create", requireAuth, Edit);
-blogRouter.delete("/blog/create", requireAuth, Delete);
+blogRouter.post("/blog", requireAuth, Create);
+blogRouter.put("/blog", requireAuth, Edit);
+blogRouter.delete("/blog", requireAuth, Delete);
 
 export default blogRouter;

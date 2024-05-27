@@ -1,16 +1,32 @@
 import blog from "../database/schema/blogSchema.js";
 import dotenv from "dotenv";
 dotenv.config();
-const JWT_SECRET = process.env.JWT_SECRET;
+import RedisClient from "../integration/redis.js";
+// const JWT_SECRET = process.env.JWT_SECRET;
 
 export const getAll = async (req, res) => {
+  // check cache
+  const cachekey = "/blog";
+  // get data from database
+  const data = await RedisClient.get(cachekey);
+  if (data) {
+    console.log("returning data from cache");
+    return res.status(200).send({
+      data: JSON.parse(data),
+      error: false,
+    });
+  }
+  console.log("returning data from database");
   const post = await blog.find({});
+  // set cache
+  await RedisClient.setEx(cachekey, 10 * 60, JSON.stringify(post));
   res.status(200).send({
     AllPost: post,
   });
 };
 
 export const Create = async (req, res) => {
+  await blog.create(req.body);
   const { title, description, author, body } = req.body;
   const oldPost = await blog.findOne({});
   if (oldPost.title === req.body.title) {

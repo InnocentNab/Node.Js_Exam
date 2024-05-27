@@ -9,10 +9,5 @@ dotenv.config();
 const UserRouter = express.Router();
 
 UserRouter.post("/user/register", CreateValidation, userController.register);
-UserRouter.post(
-  "/user/login",
-  LoginValidation,
-  requireAuth,
-  userController.login
-);
+UserRouter.post("/user/login", LoginValidation, userController.login);
 export default UserRouter;

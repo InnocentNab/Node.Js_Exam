@@ -55,8 +55,8 @@ export const login = async (req, res) => {
     const token = createToken(user._id);
     res.status(200).send({
       user: User._id,
-      token,
     });
+    console.log(token);
   } catch (error) {
     res.status(400).send({});
   }

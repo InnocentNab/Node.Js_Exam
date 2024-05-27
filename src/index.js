@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { connect } from "./database/db.connect.js";
 import redis from "./integration/redis.js";
+import morgan from "morgan";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+app.use(morgan("dev"));
 const PORT = process.env.PORT || 3333;
 const MONGODB_URI = process.env.MONGO_DB_URI;
 
